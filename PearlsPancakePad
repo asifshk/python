@@ -1,0 +1,147 @@
+import math
+
+
+def get_table_number():
+    table_number = int(input('Please enter the table number: '))
+    if table_number <= 0:
+        print('Table number can only be a positive integer')
+        get_table_number()
+    else:
+        return table_number
+
+    
+def get_number_of_diners_at_table():
+    number_of_diners = int(input('Please enter the number of diners at this table: '))
+    if number_of_diners < 1 or number_of_diners > 4:
+        print('Maximum 4 diners allowed per table,\nPlease enter a number between 1 and 4')
+        get_number_of_diners_at_table()
+    else:
+        return number_of_diners
+    
+    
+def display_menu_of_food_items():
+    print('<======= Pearl Menu =======>')
+    print('1. Item:1 - $11')
+    print('2. Item:2 - $12')
+    print('3. Item:3 - $13')
+    print('4. Item:4 - $14')
+    print('5. Item:5 - $15')
+    print('6. Item:6 - $16')
+    print('7. Item:7 - $17')
+    print('<==========================>')
+    
+    
+def get_menu_item(item_ordered):
+    if item_ordered == 1:
+        return 11
+    if item_ordered == 2:
+        return 12
+    if item_ordered == 3:
+        return 13
+    if item_ordered == 4:
+        return 14
+    if item_ordered == 5:
+        return 15
+    if item_ordered == 6:
+        return 16
+    if item_ordered == 7:
+        return 17
+    else:
+        print('Invalid entry: no such item#')
+        return 0
+    
+    
+def get_diner_order():
+    total_for_diner = 0
+    order_complete = 'y'
+        
+    while order_complete != 'y':
+        display_menu_of_food_items()
+        menu_item = int(input('Enter the item# you wish to order: '))
+        item_quantity = int(input('Enter the required quantity of item# ' + str(menu_item)))
+        total_for_diner = total_for_diner + (get_menu_item(menu_item) * item_quantity)
+        order_complete = input('Do you wish to add more items? (y/n): ')   
+    return total_for_diner
+
+
+def display_diners_total(total_diner_1, total_diner_2, total_diner_3, total_diner_4):
+    if total_diner_1 > 0:
+        print('\nDiner# 1: \nTotal before tax: $' + str(total_diner_1) + '\nTotal after tax: $' + 
+
+str(total_diner_1 * 1.08))
+    if total_diner_2 > 0:
+        print('\nDiner# 2: \nTotal before tax: $' + str(total_diner_2) + '\nTotal after tax: $' + 
+
+str(total_diner_2 * 1.08))
+    if total_diner_3 > 0:
+        print('\nDiner# 3: \nTotal before tax: $' + str(total_diner_3) + '\nTotal after tax: $' + 
+
+str(total_diner_3 * 1.08))
+    if total_diner_4 > 0:
+        print('\nDiner# 4: \nTotal before tax: $' + str(total_diner_4) + '\nTotal after tax: $' + 
+
+str(total_diner_4 * 1.08))
+    
+
+def calculate_table_total(total_diner_1, total_diner_2, total_diner_3, total_diner_4):
+    total_before_tax = total_diner_1 + total_diner_2 + total_diner_3 + total_diner_4
+    tax_rate = 0.08
+    total_after_tax = total_before_tax * 1.08
+    return total_after_tax
+
+
+def display_table_total_info(total_after_tax):
+    print('The total after tax for this table is $' + str(total_after_tax))
+    print('The suggested tip amounts are:')
+    print('10% - $' + str(total_after_tax * 0.10))
+    print('15% - $' + str(total_after_tax * 0.15))
+    print('20% - $' + str(total_after_tax * 0.20))
+    print('25% - $' + str(total_after_tax * 0.25))
+    
+    
+def get_table_order():
+    total_diner_1 = total_diner_2 = total_diner_3 = total_diner_4 = 0
+    number_of_diners = int(get_number_of_diners())
+    if number_of_diners == 1:
+        print('\nOrder for Diner# 1')
+        total_diner_1 = get_diner_order()
+    elif number_of_diners == 2:
+        print('\nOrder for Diner# 1')
+        total_diner_1 = get_diner_order()
+        print('\nOrder for Diner# 2')
+        total_diner_2 = get_diner_order()
+    elif number_of_diners == 3:
+        print('\nOrder for Diner# 1')
+        total_diner_1 = get_diner_order()
+        print('\nOrder for Diner# 2')
+        total_diner_2 = get_diner_order()
+        print('\nOrder for Diner# 3')
+        total_diner_3 = get_diner_order()
+    elif number_of_diners == 4:
+        print('\nOrder for Diner# 1')
+        total_diner_1 = get_diner_order()
+        print('\nOrder for Diner# 2')
+        total_diner_2 = get_diner_order()
+        print('\nOrder for Diner# 3')
+        total_diner_3 = get_diner_order()
+        print('\nOrder for Diner# 4')
+        total_diner_4 = get_diner_order()
+        
+    total_after_tax = calculate_table_total(total_diner_1, total_diner_2, total_diner_3, 
+
+total_diner_4)
+    return total_after_tax
+    
+    
+def main_program():
+    todays_total = 0
+
+    question_continue == 'y'
+    while question_continue == 'y':
+        get_table_number = get_table_number()
+        get_number_of_diners_at_table = get_number_of_diners_at_table
+        get_table_order = get_table_order()
+        question_continue = input('Do you wish to continue the operation? (y or n)')
+        todays_total = todays_total + get_table_order()
+        
+    print("Today's total is $" + str(todays_total))
